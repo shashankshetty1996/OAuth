@@ -1,6 +1,6 @@
 <template>
-  <div class="Login">
-    <p>Client id is {{ clientID }}</p>
+  <div class="login">
+    <p class="banner-text">Client id is {{ clientID }}</p>
     <InputField
       type="email"
       :value="email"
@@ -46,4 +46,13 @@ export default {
 </script>
 
 <style>
+.login {
+  padding: 10px 15%;
+}
+.banner-text {
+  color: #1faced;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 48px 0;
+}
 </style>

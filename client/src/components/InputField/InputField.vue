@@ -48,6 +48,7 @@ export default {
 <style>
 .input-field {
   position: relative;
+  margin: 16px auto;
 }
 
 .input {
@@ -57,7 +58,6 @@ export default {
   display: block;
   font-size: 16px;
   outline: none;
-  margin: 8px auto;
   max-width: 768px;
   padding: 8px 36px 8px 12px;
   width: 100%;
