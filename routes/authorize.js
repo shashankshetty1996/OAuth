@@ -9,7 +9,7 @@ const router = express.Router();
  *
  * @method GET
  *
- * @route authorize?clientID=<<string>>&redirectURI=<<string>>
+ * @route /authorize?clientID=<<string>>&redirectURI=<<string>>
  */
 router.get('/', (req, res) => {
   const reqQuery = req.query;

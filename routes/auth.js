@@ -8,6 +8,14 @@ const ImplicitAuth = require('../models/ImplicitAuth');
 /**
  * @description
  * This method is used to create implicit auth entry
+ *
+ * @access PRIVATE
+ *
+ * @method POST
+ *
+ * @route /auth
+ * @argument { string } clientID this signify clientID of the application
+ * @argument { string } applicationName this signify application name
  */
 router.post('/', async (req, res) => {
   const { clientID, applicationName } = req.body;
