@@ -12,9 +12,8 @@ const LoginComponent = resolve => {
 };
 
 const routes = [
-  { path: '/', name: 'Login', component: LoginComponent },
-  { path: '/home', name: 'Home', component: HomeComponent },
-  { path: '*', redirect: '/home' }
+  { path: '/login', name: 'Login', component: LoginComponent },
+  { path: '/home', name: 'Home', component: HomeComponent }
 ];
 
 export default routes;
