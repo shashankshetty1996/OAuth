@@ -31,6 +31,10 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 
+app.use('/user', require('./routes/user'));
+app.use('/authorize', require('./routes/authorize'));
+app.use('/auth', require('./routes/auth'));
+
 /**
  * @description
  * This route is used to for server health check
@@ -42,13 +46,8 @@ app.set('view engine', 'hbs');
  * @route '/'
  */
 app.get('/', (req, res) => {
-  // res.sendFile(path.join(__dirname, 'server-running.html'));
   res.render('health');
 });
-
-app.use('/user', require('./routes/user'));
-app.use('/authorize', require('./routes/authorize'));
-app.use('/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || config.get('PORT') || 5000;
 
