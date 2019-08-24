@@ -8,8 +8,8 @@
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "node serve --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client": "yarn --cwd client serve",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "author": "Shashank S Shetty",
   "license": "MIT",
