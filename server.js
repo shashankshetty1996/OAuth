@@ -4,7 +4,12 @@ const exphbs = require('express-handlebars');
 const config = require('config');
 const path = require('path');
 
+const connectDB = require('./config/mongo');
+
 const app = express();
+
+// Connecting to Database
+connectDB();
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,6 +45,7 @@ app.get('/', (req, res) => {
 
 app.use('/user', require('./routes/user'));
 app.use('/authorize', require('./routes/authorize'));
+app.use('/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || config.get('PORT') || 5000;
 
