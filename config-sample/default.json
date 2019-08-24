@@ -1,0 +1,4 @@
+{
+  "PORT": 8000,
+  "MONGO_URI": "mongodb://<<username>>:<<dbpassword>>@ds159767.mlab.com:59767/oauth-matic"
+}
