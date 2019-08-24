@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const config = require('config');
+const morgan = require('morgan');
 const path = require('path');
 
 const connectDB = require('./config/mongo');
@@ -10,6 +11,8 @@ const app = express();
 
 // Connecting to Database
 connectDB();
+
+app.use(morgan('dev'));
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
