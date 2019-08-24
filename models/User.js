@@ -21,6 +21,10 @@ const UserSchema = new Schema({
   contact: {
     type: Number,
     require: true
+  },
+  clientID: {
+    type: Schema.Types.ObjectId,
+    ref: 'implicitAuth'
   }
 });
 
