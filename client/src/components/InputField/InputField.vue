@@ -38,7 +38,7 @@ export default {
       const { value: inputValue } = $event.target;
       this.$emit("updateValue", this.name, inputValue);
     },
-    clearText($event) {
+    clearText() {
       this.$emit("updateValue", this.name, "");
     }
   }
