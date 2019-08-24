@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  background-color: #efefef;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.health {
+  color: #3e214c;
+}
