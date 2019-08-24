@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: "",
-  secretOrKeys: "matic network"
+  mongoURI: '',
+  secretOrKeys: 'matic network'
 };
