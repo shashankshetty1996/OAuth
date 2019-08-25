@@ -1,6 +1,10 @@
 <section class="login">
   <header>
     <h1 class="login-title">Allow access to Game of Theories</h1>
+    {{#each errors}}
+    <div class="error">{{{error}}}</div>
+    {{else}}
+    {{/each}}
   </header>
   <form action="/authorize/{{{id}}}" method="post">
     <div class="form-group">

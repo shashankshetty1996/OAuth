@@ -2,6 +2,7 @@
   --black-color: #353029;
   --white-color: #ffffff;
   --primary-color: #1f89ed;
+  --error-color: #df2f2f;
   --grey: #d0d0d0;
 }
 
@@ -39,16 +40,22 @@ body {
   width: 80%;
 }
 
-.login h1 {
+.login header h1 {
   color: var(--primary-color);
   font-size: 32px;
   font-weight: 400;
 }
 
+.login .error {
+  color: var(--white-color);
+  background-color: var(--error-color);
+  padding: 8px 16px;
+  text-align: left;
+}
+
 .login .form-group {
-  margin: 16px 8px;
+  margin: 16px 0;
   position: relative;
-  padding: 8px 4px;
 }
 
 .login .form-group input {
