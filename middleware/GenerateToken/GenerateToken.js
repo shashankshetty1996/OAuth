@@ -6,7 +6,6 @@ async function generateToken(payload, jwtOptions = { expiresIn: '1h' }) {
 
   try {
     const token = await jwt.sign(payload, jwtSecret, jwtOptions);
-    console.log('token is', token);
     return token;
   } catch (error) {
     new Error('Failed to generate accessToken');
