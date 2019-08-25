@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
   const isValid = Validate([
     { value: clientID, type: 'string', minLength: 3 },
     { value: applicationName, type: 'string', minLength: 3 },
-    { value: redirectURI, type: 'email' }
+    { value: redirectURI, type: 'string', minLength: 3 }
   ]);
 
   if (!isValid) {
@@ -42,7 +42,11 @@ router.post('/', async (req, res) => {
       res.status(404).json({ message: 'ClientID already exist' });
     }
 
-    const newOpenID = new ImplicitAuth({ clientID, applicationName });
+    const newOpenID = new ImplicitAuth({
+      clientID,
+      applicationName,
+      redirectURI
+    });
     await newOpenID.save();
 
     return res.status(200).json({ message: 'Created Open id succesfully' });
