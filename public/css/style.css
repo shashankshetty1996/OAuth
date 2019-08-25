@@ -46,27 +46,26 @@ body {
 }
 
 .login .form-group {
-  position: relative;
   margin: 16px 8px;
+  position: relative;
   padding: 8px 4px;
 }
 
 .login .form-group input {
-  width: 100%;
-  background-color: transparent;
-  box-sizing: border-box;
   color: var(--black-color);
-  margin: 4px 0px;
-  padding: 8px 0px;
-  padding-right: 36px;
-  font-size: 18px;
+  background-color: transparent;
   border: 0px;
-  outline: none;
-  text-indent: 16px;
   border-bottom: 1px solid var(--black-color);
   box-shadow: none;
   box-sizing: border-box;
+  font-size: 18px;
+  padding: 8px 0px;
+  padding-right: 36px;
+  margin: 4px 0px;
+  outline: none;
+  text-indent: 16px;
   transition: 0.2s ease-in-out;
+  width: 100%;
 }
 
 .login .form-group .clear-value {
