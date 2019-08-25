@@ -9,6 +9,10 @@ const ImplicitAuthSchema = new Schema({
   applicationName: {
     type: String,
     required: true
+  },
+  redirectURI: {
+    type: String,
+    required: true
   }
 });
 

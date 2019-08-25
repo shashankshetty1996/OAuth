@@ -16,13 +16,15 @@ const ImplicitAuth = require('../models/ImplicitAuth');
  * @route /auth
  * @argument { string } clientID this signify clientID of the application
  * @argument { string } applicationName this signify application name
+ * @argument { string } redirectURI this is redirect application once login is successful
  */
 router.post('/', async (req, res) => {
-  const { clientID, applicationName } = req.body;
+  const { clientID, applicationName, redirectURI } = req.body;
 
   const isValid = Validate([
     { value: clientID, type: 'string', minLength: 3 },
-    { value: applicationName, type: 'string', minLength: 3 }
+    { value: applicationName, type: 'string', minLength: 3 },
+    { value: redirectURI, type: 'string', minLength: 3 }
   ]);
 
   if (!isValid) {
@@ -30,7 +32,11 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const client = await ImplicitAuth.findOne({ clientID });
+    const client = await ImplicitAuth.findOne({
+      clientID,
+      applicationName,
+      redirectURI
+    });
 
     if (client) {
       res.status(404).json({ message: 'ClientID already exist' });
