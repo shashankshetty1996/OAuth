@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
@@ -83,13 +84,25 @@ router.post('/:id', async (req, res) => {
       });
     }
 
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ messge: 'Invalid Credentials' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ messge: 'Invalid Credentials' });
+    }
+
     const payload = {
-      email
+      user: {
+        id: user._id
+      }
     };
 
     const accessToken = await GenerateToken(payload);
-
-    console.log('accessToken is', accessToken);
 
     return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
   } catch (error) {
