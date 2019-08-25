@@ -2,7 +2,7 @@
   <header>
     <h1 class="login-title">Allow access to Game of Theories</h1>
   </header>
-  <form action="/api/authorize" method="post">
+  <form action="/authorize/{{{id}}}" method="post">
     <div class="form-group">
       <input type="email" name="email" class="form-input" placeholder="Email ID" required />
       <span class="clear-value">x</span>
@@ -10,10 +10,6 @@
     <div class="form-group">
       <input type="password" name="password" class="form-input" placeholder="Password" required />
       <span class="clear-value">x</span>
-    </div>
-    <div class="form-group">
-      <input type="hidden" name="clientID" value={{{clientID}}} />
-      <input type="hidden" name="redirectURI" value={{{redirectURI}}} />
     </div>
     <input type="submit" class="btn" value="Sign In">
   </form>
