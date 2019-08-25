@@ -1,13 +1,11 @@
 const express = require('express');
-const config = require('config');
-const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
 const ImplicitAuth = require('../models/ImplicitAuth');
 const User = require('../models/User');
 
-const { ErrorHandler, Validate } = require('../middleware');
+const { ErrorHandler, GenerateToken, Validate } = require('../middleware');
 
 /**
  * @description
@@ -85,21 +83,15 @@ router.post('/:id', async (req, res) => {
       });
     }
 
-    const jwtSecret = config.get('JWT_SECRET');
     const payload = {
       email
     };
 
-    return jwt.sign(
-      payload,
-      jwtSecret,
-      { expiresIn: '1h' },
-      (err, accessToken) => {
-        if (err) throw new Error('Failed to generate accessToken');
-        // redirect to RedirectURI
-        return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
-      }
-    );
+    const accessToken = await GenerateToken(payload);
+
+    console.log('accessToken is', accessToken);
+
+    return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
   } catch (error) {
     return ErrorHandler(res, error);
   }
