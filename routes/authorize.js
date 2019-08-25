@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const ImplicitAuth = require('../models/ImplicitAuth');
-const { ErrorHandler } = require('../middleware');
+const User = require('../models/User');
+
+const { ErrorHandler, Validate } = require('../middleware');
 
 /**
  * @description
@@ -64,6 +66,21 @@ router.post('/:id', async (req, res) => {
     }
 
     // Do user Authenication here
+    isValid = Validate([
+      { value: email, type: 'email' },
+      { value: password, type: 'string' }
+    ]);
+
+    if (!isValid) {
+      const error = 'Invalid field';
+      return res.render('login', {
+        id,
+        error,
+        email,
+        password
+      });
+    }
+
     const accessToken = 'Take your accessToken from here';
 
     // redirect to RedirectURI
