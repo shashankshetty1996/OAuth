@@ -9,7 +9,7 @@ const ImplicitAuth = require('../models/ImplicitAuth');
  * @description
  * This method is used to create implicit auth entry
  *
- * @access PRIVATE
+ * @access private
  *
  * @method POST
  *
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
   ]);
 
   if (!isValid) {
-    return res.status(404).json({ message: 'Invalid arugments sent' });
+    return res.status(400).json({ message: 'Invalid arugments sent' });
   }
 
   try {
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
     });
 
     if (client) {
-      res.status(404).json({ message: 'ClientID already exist' });
+      res.status(400).json({ message: 'ClientID already exist' });
     }
 
     const newOpenID = new ImplicitAuth({

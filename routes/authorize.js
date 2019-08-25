@@ -8,7 +8,7 @@ const { ErrorHandler } = require('../middleware');
  * @description
  * This function is used to redirect user to webpage where user can login and get authenicated
  *
- * @access PUBLIC
+ * @access public
  *
  * @method GET
  *
@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
  *
  * @method POST
  *
- * @access Protected
+ * @access protected
  *
  * @route /authorize/id<<ObjectId>>
  */
@@ -52,7 +52,7 @@ router.post('/:id', async (req, res) => {
 
   // Validation of id
   if (!id) {
-    return res.status(404).json({ message: `Client id hasn't been passed` });
+    return res.status(400).json({ message: `Client id hasn't been passed` });
   }
 
   try {
@@ -60,7 +60,7 @@ router.post('/:id', async (req, res) => {
     const client = await ImplicitAuth.findById(id);
 
     if (!client) {
-      return res.status(403).json({ message: `Application isn't registered` });
+      return res.status(422).json({ message: `Application isn't registered` });
     }
 
     // Do user Authenication here
