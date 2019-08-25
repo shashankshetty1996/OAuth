@@ -5,18 +5,39 @@ const router = express.Router();
 
 const User = require('../models/User');
 
-const { Validate } = require('../middleware');
+const { Validate, ErrorHandler } = require('../middleware');
 
-router.get('/', (req, res) => {
-  // User dummy data
-  const userData = {
-    username: 'Shashank S Shetty',
-    country: 'India',
-    contact_number: 987654321
-  };
+/**
+ * @description
+ * This route used to get all the users for a particular authorization server.
+ *
+ * @access private
+ *
+ * @method GET
+ *
+ * @route /user
+ */
+router.get('/', async (req, res) => {
+  const { authorizationServerID, email } = req.query;
 
-  // JSON resource
-  res.json(userData);
+  if (!authorizationServerID) {
+    return res.status(400).json({ message: 'Unknown authorization server' });
+  }
+
+  try {
+    const user = await User.findOne({ authorizationServerID, email }).select([
+      '-password',
+      '-__v'
+    ]);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    return ErrorHandler(res, error);
+  }
 });
 
 /**
@@ -75,7 +96,9 @@ router.post('/', async (req, res) => {
     await newUser.save();
 
     return res.status(200).json({ message: 'User created successfully' });
-  } catch (error) {}
+  } catch (error) {
+    return ErrorHandler(res, error);
+  }
 });
 
 module.exports = router;
