@@ -5,7 +5,11 @@ const router = express.Router();
 
 const User = require('../models/User');
 
-const { Validate, ErrorHandler } = require('../middleware');
+const {
+  AuthenicateAccessToken,
+  Validate,
+  ErrorHandler
+} = require('../middleware');
 
 /**
  * @description
@@ -17,7 +21,7 @@ const { Validate, ErrorHandler } = require('../middleware');
  *
  * @route /user
  */
-router.get('/', async (req, res) => {
+router.get('/', AuthenicateAccessToken, async (req, res) => {
   const { authorizationServerID, email } = req.query;
 
   if (!authorizationServerID) {
