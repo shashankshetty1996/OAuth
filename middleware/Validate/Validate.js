@@ -14,34 +14,21 @@ function validateEmail(value) {
 }
 
 function isValidValue(value, type) {
-  if (type !== 'array' && typeof value !== type) {
-    return false;
-  } else if (
-    type === 'array' &&
-    (typeof value !== 'object' || !Array.isArray(value))
-  ) {
-    return false;
-  } else {
-    switch (typeof value) {
-      case 'string': {
-        return value !== '';
-      }
-
-      case 'number': {
-        return !isNaN(value);
-      }
-
-      case 'object': {
-        if (Array.isArray(value)) {
-          return value.length !== 0;
-        } else {
-          return Object.keys(value).length !== 0;
-        }
-      }
-
-      default:
-        return true;
+  switch (typeof value) {
+    case 'string': {
+      return value !== '';
     }
+
+    case 'object': {
+      if (Array.isArray(value)) {
+        return value.length !== 0;
+      } else {
+        return Object.keys(value).length !== 0;
+      }
+    }
+
+    default:
+      return true;
   }
 }
 
