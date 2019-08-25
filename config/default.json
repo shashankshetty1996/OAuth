@@ -1,4 +1,5 @@
 {
   "PORT": 8000,
-  "MONGO_URI": "mongodb://shashank:test%40123@ds159767.mlab.com:59767/oauth-matic"
+  "MONGO_URI": "mongodb://shashank:test%40123@ds159767.mlab.com:59767/oauth-matic",
+  "JWT_SECRET": "f,95q8qhaN$S4R~G"
 }

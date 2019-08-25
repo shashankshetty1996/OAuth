@@ -1,4 +1,7 @@
 const express = require('express');
+const config = require('config');
+const jwt = require('jsonwebtoken');
+
 const router = express.Router();
 
 const ImplicitAuth = require('../models/ImplicitAuth');
@@ -71,6 +74,7 @@ router.post('/:id', async (req, res) => {
       { value: password, type: 'string' }
     ]);
 
+    // Redirect to display login
     if (!isValid) {
       const error = 'Invalid field';
       return res.render('login', {
@@ -81,10 +85,21 @@ router.post('/:id', async (req, res) => {
       });
     }
 
-    const accessToken = 'Take your accessToken from here';
+    const jwtSecret = config.get('JWT_SECRET');
+    const payload = {
+      email
+    };
 
-    // redirect to RedirectURI
-    return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
+    return jwt.sign(
+      payload,
+      jwtSecret,
+      { expiresIn: '1h' },
+      (err, accessToken) => {
+        if (err) throw new Error('Failed to generate accessToken');
+        // redirect to RedirectURI
+        return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
+      }
+    );
   } catch (error) {
     return ErrorHandler(res, error);
   }
