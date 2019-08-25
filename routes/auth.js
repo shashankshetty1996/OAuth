@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
   const isValid = Validate([
     { value: clientID, type: 'string', minLength: 3 },
     { value: applicationName, type: 'string', minLength: 3 },
-    { value: redirectURI, type: 'string', minLength: 3 }
+    { value: redirectURI, type: 'email' }
   ]);
 
   if (!isValid) {
