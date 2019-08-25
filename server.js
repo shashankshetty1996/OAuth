@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 
 // Setting up static folder
 app.use('/static', express.static(path.join(__dirname, 'public')));
-app.use(express.static('client/build'));
 
 // View Engine
 app.engine(
@@ -32,9 +31,9 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 
-app.use('api/user', require('./routes/user'));
-app.use('api/authorize', require('./routes/authorize'));
-app.use('api/auth', require('./routes/auth'));
+app.use('/user', require('./routes/user'));
+app.use('/authorize', require('./routes/authorize'));
+app.use('/auth', require('./routes/auth'));
 
 /**
  * @description
@@ -48,13 +47,6 @@ app.use('api/auth', require('./routes/auth'));
  */
 app.get('/', (req, res) => {
   res.render('health');
-});
-
-// Set static folder
-app.use(express.static('client/dist'));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || config.get('PORT') || 5000;

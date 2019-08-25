@@ -11,3 +11,9 @@ body {
 .health {
   color: #3e214c;
 }
+
+.login {
+  max-width: 768px;
+  width: 80%;
+  margin: 0 auto;
+}

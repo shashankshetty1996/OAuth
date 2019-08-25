@@ -15,7 +15,7 @@ const { ErrorHandler } = require('../middleware');
  * @route /authorize?clientID=<<string>>&redirectURI=<<string>>
  */
 router.get('/', async (req, res) => {
-  const { clientID } = req.query;
+  const { clientID, redirectURI } = req.query;
 
   try {
     const client = await ImplicitAuth.findOne({ clientID });
@@ -23,8 +23,10 @@ router.get('/', async (req, res) => {
     if (!client) {
       return res.status(404).json({ message: 'Invalid Client ID' });
     }
-
-    return res.json(client);
+    return res.render('login', {
+      clientID,
+      redirectURI
+    });
   } catch (error) {
     return ErrorHandler(res, error);
   }
