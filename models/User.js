@@ -14,15 +14,15 @@ const UserSchema = new Schema({
     type: String,
     require: true
   },
-  country: {
-    type: String,
-    default: 'India'
-  },
   contact: {
     type: Number,
     require: true
   },
-  clientID: {
+  country: {
+    type: String,
+    default: 'India'
+  },
+  authorizationServerID: {
     type: Schema.Types.ObjectId,
     ref: 'implicitAuth'
   }
