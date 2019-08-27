@@ -88,6 +88,7 @@ router.post('/:id', async (req, res) => {
       return res.render('login', { id, error });
     }
 
+    // Password validation using bcrypt, since password will be hashed.
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -95,14 +96,17 @@ router.post('/:id', async (req, res) => {
       return res.render('login', { id, error });
     }
 
+    // JWT token payload, to access user information
     const payload = {
       user: {
         id: user._id
       }
     };
 
+    // accessToken
     const accessToken = await GenerateToken(payload);
 
+    // Client registered redirectURI with accessToken
     return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
   } catch (error) {
     return res.render('login', { id, error: 'Server error' });
