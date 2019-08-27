@@ -76,24 +76,23 @@ router.post('/:id', async (req, res) => {
     // Redirect to display login
     if (!isValid) {
       const error = 'Invalid field';
-      return res.render('login', {
-        id,
-        error,
-        email,
-        password
-      });
+      return res.render('login', { id, error });
     }
 
+    // Fetching user details for give mail id.
     const user = await User.findOne({ email });
 
+    // Validating
     if (!user) {
-      return res.status(400).json({ messge: 'Invalid Credentials' });
+      const error = 'User with this email id does not exist';
+      return res.render('login', { id, error });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ messge: 'Invalid Credentials' });
+      const error = 'Invalid Credentials';
+      return res.render('login', { id, error });
     }
 
     const payload = {
@@ -106,7 +105,7 @@ router.post('/:id', async (req, res) => {
 
     return res.redirect(`${client.redirectURI}?accessToken=${accessToken}`);
   } catch (error) {
-    return ErrorHandler(res, error);
+    return res.render('login', { id, error: 'Server error' });
   }
 });
 
